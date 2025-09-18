@@ -1,0 +1,30 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Remove="DTOs\AuthorizedDealer\**" />
+    <Compile Remove="Features\CommonTypeMsaters\Commands\UpdateCommonTypeMsater\**" />
+    <EmbeddedResource Remove="DTOs\AuthorizedDealer\**" />
+    <EmbeddedResource Remove="Features\CommonTypeMsaters\Commands\UpdateCommonTypeMsater\**" />
+    <None Remove="DTOs\AuthorizedDealer\**" />
+    <None Remove="Features\CommonTypeMsaters\Commands\UpdateCommonTypeMsater\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="11.10.0" />
+    <PackageReference Include="MediatR" Version="12.4.1" />
+    <PackageReference Include="Otp.NET" Version="1.4.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\LoginApi.Domain\HyBrForex.Domain.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Features\Account\VoucherEntry\Commands\" />
+    <Folder Include="Features\Account\VoucherEntry\Queries\" />
+    <Folder Include="Features\CurrencyBoard\Commands\DeleteNotification\" />
+    <Folder Include="Features\CurrencyBoard\Commands\UpdateNotification\" />
+    <Folder Include="Features\CurrencyBoard\Queries\" />
+    <Folder Include="Features\SurrenderEvtmDetail\Query\" />
+    <Folder Include="Features\SurrenderEVtmPayment\Query\" />
+  </ItemGroup>
+</Project>

@@ -1,0 +1,12 @@
+﻿@page
+@model HyBrForex.WebApi.Pages.IndexModel
+@{
+}
+
+<h2>Registered Routes</h2>
+<ul>
+	@foreach (var route in Model.Routes)
+	{
+		<li>@route</li>
+	}
+</ul>

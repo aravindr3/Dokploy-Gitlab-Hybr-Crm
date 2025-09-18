@@ -1,0 +1,24 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Remove="DTOs\AuthorizedDealer\**" />
+    <EmbeddedResource Remove="DTOs\AuthorizedDealer\**" />
+    <None Remove="DTOs\AuthorizedDealer\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="11.10.0" />
+    <PackageReference Include="MediatR" Version="12.4.1" />
+    <PackageReference Include="Microsoft.AspNetCore.SignalR" Version="1.2.0" />
+    <PackageReference Include="Otp.NET" Version="1.4.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\LoginApi.Domain\HyBrCRM.Domain.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Features\CurrencyBoard\Commands\DeleteNotification\" />
+    <Folder Include="Features\CurrencyBoard\Commands\UpdateNotification\" />
+    <Folder Include="Features\CurrencyBoard\Queries\" />
+  </ItemGroup>
+</Project>
