@@ -5,7 +5,7 @@ services:
     image: aravindr231/hybrcrmwebapi:latest
     container_name: hybrcrm-webapi
     ports:
-      - "8441:80"  # Map host port 8441 to container port 80
+      - "80:80"  # Map host port 8441 to container port 80
       - "8443:443" # Map host port 8443 to container port 443 (if HTTPS is supported)
     environment:
       # Common environment variables for web APIs
@@ -67,3 +67,4 @@ volumes:
   app-data:
 
   logs:
+
