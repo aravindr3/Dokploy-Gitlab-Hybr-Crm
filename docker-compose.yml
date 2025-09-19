@@ -10,10 +10,11 @@ services:
       - ConnectionStrings__DefaultConnection=Server=dbserver1.hybrhind.com;Port=6432;Database=crm_dev_db;User Id=apuser;Password=apuse6@#2260;Command Timeout=0;TimeZone=Asia/Kolkata
     labels:
       - "traefik.enable=true"
+      # Route by hostname
       - "traefik.http.routers.api.rule=Host(`uatcrm-uatcrmapi-ya2jx8-b348c0-31-97-202-93.traefik.me`)"
-      - "traefik.http.routers.api.entrypoints=websecure"
+      # Expose on both HTTP and HTTPS entrypoints for safety
+      - "traefik.http.routers.api.entrypoints=web,websecure"
+      # Enable TLS on websecure
       - "traefik.http.routers.api.tls=true"
+      # Forward traffic to the container's internal port 5000
       - "traefik.http.services.api.loadbalancer.server.port=5000"
-
-
-
