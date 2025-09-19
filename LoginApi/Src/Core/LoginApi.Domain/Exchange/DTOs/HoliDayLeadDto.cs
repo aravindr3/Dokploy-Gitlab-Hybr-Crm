@@ -35,6 +35,7 @@ namespace HyBrCRM.Domain.Exchange.DTOs
             CategoryId = holiDaysLead?.CategoryId;
             Created = holiDaysLead?.Created;
             Status = holiDaysLead?.Status;
+            Other = holiDaysLead?.Other;
 
         }
         public string ? Id { get; set; }
@@ -67,6 +68,7 @@ namespace HyBrCRM.Domain.Exchange.DTOs
      public DateTime ? Created {  get; set; }
         public DateTime ? LastTask {  get; set; }
         public string ? Stage {  get; set; }
+        public string ? Other {  get; set; }
         public LeadContactDto? Contact { get; set; }
         public List<LeadPropertyValueDto>? LeadProperties { get; set; }
         public List<LeadDocumentDto>? LeadDocument { get; set; }

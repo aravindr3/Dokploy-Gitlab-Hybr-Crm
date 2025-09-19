@@ -31,6 +31,10 @@ namespace HyBrCRM.WebApi.Controllers.v1
             }
 
             var _uploadPath = Path.Combine(Directory.GetCurrentDirectory(), "LeadDocument");
+            if (!Directory.Exists(_uploadPath))
+            {
+                Directory.CreateDirectory(_uploadPath);
+            }
 
             if (string.IsNullOrEmpty(LeadFileName))
             {

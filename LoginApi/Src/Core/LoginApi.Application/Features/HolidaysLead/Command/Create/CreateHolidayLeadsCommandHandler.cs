@@ -49,7 +49,8 @@ namespace HyBrCRM.Application.Features.HolidaysLead.Command.Create
             request.VerticalId,
             request?.LeadSourceId,
             request?.LeadStatusId,
-            request?.CategoryId
+            request?.CategoryId,
+            request?.Other
 
 
                 );
@@ -78,7 +79,7 @@ namespace HyBrCRM.Application.Features.HolidaysLead.Command.Create
             {
                 Id = Ulid.NewUlid().ToString(),
                 LeadId = master.Id,
-                OwnerId = request?.OwnerId
+                OwnerId = request?.AsignedAgent,
             };
 
             // If PreferedCountry is provided, add PropertyDefinition and Value

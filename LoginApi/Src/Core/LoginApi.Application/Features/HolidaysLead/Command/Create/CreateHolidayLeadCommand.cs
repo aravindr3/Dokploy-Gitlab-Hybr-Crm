@@ -32,5 +32,6 @@ namespace HyBrCRM.Application.Features.HolidaysLead.Command.Create
         public string? LeadStatusId { get; set; }
         public string ? CategoryId { get; set; }
         public string ? OwnerId { get; set; }
+        public string ? Other {  get; set; }
     }
 }

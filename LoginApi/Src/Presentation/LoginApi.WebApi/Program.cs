@@ -1,6 +1,12 @@
 using System;
+using System.IO;
 using System.Threading.Tasks;
 using FluentValidation.AspNetCore;
+using HyBrCRM.Application.Interfaces.Repositories;
+using HyBrCRM.Domain.Bonvoice.DTO.Request;
+using HyBrCRM.Domain.Exchange.Entities;
+using HyBrCRM.Infrastructure.Persistence.Settings;
+using HyBrCRM.Infrastructure.Resources;
 using HyBrForex.Application;
 using HyBrForex.Application.Interfaces;
 using HyBrForex.Application.Interfaces.Repositories;
@@ -9,25 +15,23 @@ using HyBrForex.Infrastructure.Identity;
 using HyBrForex.Infrastructure.Identity.Services;
 using HyBrForex.Infrastructure.Persistence;
 using HyBrForex.Infrastructure.Persistence.Repositories;
-using HyBrCRM.Infrastructure.Resources;
 using HyBrForex.WebApi.Infrastructure.Extensions;
 using HyBrForex.WebApi.Infrastructure.Filters;
 using HyBrForex.WebApi.Infrastructure.Middlewares;
 using HyBrForex.WebApi.Infrastructure.Services;
 using LoginApi.Infrastructure.Identity;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.DataProtection;
+using Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption;
+using Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption.ConfigurationModel;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Server.Kestrel.Core;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Serilog;
-using HyBrCRM.Domain.Exchange.Entities;
-using Microsoft.EntityFrameworkCore;
-using HyBrCRM.Domain.Bonvoice.DTO.Request;
-using HyBrCRM.Infrastructure.Persistence.Settings;
-using HyBrCRM.Application.Interfaces.Repositories;
 using Microsoft.Extensions.Options;
+using Serilog;
 
 namespace HyBrForex.WebApi;
 
@@ -67,7 +71,12 @@ public class Program
         builder.Services.AddSingleton<IAutoCallSettings>(sp =>
             sp.GetRequiredService<IOptions<AutoCallSettings>>().Value);
 
-
+        builder.Services.AddDataProtection().PersistKeysToFileSystem(new DirectoryInfo(@"C:\temp-keys\"))
+                .UseCryptographicAlgorithms(new AuthenticatedEncryptorConfiguration()
+                {
+                    EncryptionAlgorithm = EncryptionAlgorithm.AES_256_CBC,
+                    ValidationAlgorithm = ValidationAlgorithm.HMACSHA256
+                });
 
 
         // Configure Kestrel
@@ -84,10 +93,10 @@ public class Program
         builder.WebHost.ConfigureKestrel(options =>
         {
             // Example: Listen on port 5000 for HTTP
-            //options.ListenAnyIP(Convert.ToInt32(builder.Configuration["KestrelSettings:Httpport"]), listenOptions =>
-            //{
-            //    listenOptions.Protocols = HttpProtocols.Http1; // Explicitly use HTTP/1.1
-            //});
+            options.ListenAnyIP(Convert.ToInt32(builder.Configuration["KestrelSettings:Httpport"]), listenOptions =>
+            {
+                listenOptions.Protocols = HttpProtocols.Http1; // Explicitly use HTTP/1.1
+            });
             options.Limits.MaxRequestBodySize = 52428800; // 50 MB
             options.Limits.KeepAliveTimeout = TimeSpan.FromMinutes(5);
             options.Limits.RequestHeadersTimeout = TimeSpan.FromMinutes(5);

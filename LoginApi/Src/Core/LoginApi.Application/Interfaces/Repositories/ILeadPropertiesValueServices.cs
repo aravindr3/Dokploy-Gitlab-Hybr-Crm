@@ -10,5 +10,6 @@ namespace HyBrCRM.Application.Interfaces.Repositories
 {
     public interface ILeadPropertiesValueServices : IGenericRepository<LeadProperyValue>
     {
+        Task<LeadProperyValue?> GetByLeadAndPropertyAsync(string leadId, string propertyDefinitionId);
     }
 }

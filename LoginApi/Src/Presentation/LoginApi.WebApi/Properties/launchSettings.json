@@ -2,7 +2,7 @@
     "profiles": {
         "HyBrCRM.WebApi": {
             "commandName": "Project",
-            "applicationUrl": "http://localhost:8082",
+            "applicationUrl": "http://localhost:8080",
             "launchBrowser": true,
             "launchUrl": "swagger"
         },
@@ -14,7 +14,7 @@
                 "ASPNETCORE_ENVIRONMENT": "Development"
             },
             "dotnetRunMessages": true,
-            "applicationUrl": "http://localhost:8082"
+            "applicationUrl": "http://localhost:8080"
         },
         "https": {
             "commandName": "Project",
@@ -40,7 +40,7 @@
             "launchBrowser": true,
             "launchUrl": "{Scheme}://{ServiceHost}:{ServicePort}/swagger",
             "environmentVariables": {
-                "ASPNETCORE_HTTP_PORTS": "8082"
+                "ASPNETCORE_HTTP_PORTS": "8080"
             },
             "publishAllPorts": true,
             "useSSL": false

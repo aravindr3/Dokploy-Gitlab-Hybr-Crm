@@ -31,39 +31,7 @@ namespace HyBrCRM.Application.Features.LeadProperties.Queries.GetById
    
     ) : IRequestHandler<LeadPropertiesGetByIdQuery, BaseResult<List<LeadPropertyValueDto>>>
     {
-        //public async Task<BaseResult<LeadPropertiesDto>> Handle(LeadPropertiesGetByIdQuery request,
-        //    CancellationToken cancellationToken)
-        //{
-        //    var masters = await leadPropertiesServices.GetByIdChildAsync(a => a.Id == request.Id);
-        //    var master = masters.Where(a => a.Status == 1).FirstOrDefault();
-        //    if (master is null) return new Error(ErrorCode.NotFound, "Lead Properties not found");
 
-
-
-        //    var dtoTasks = new LeadPropertiesDto
-        //    {
-
-
-        //        Id = master.Id,
-        //        OwnerId = master.OwnerId,
-        //        OwnerName = userService?.GetUserByIdAsync(master?.OwnerId)?.Result?.Data?.UserName,
-
-        //        LeadId = master.LeadId,
-        //        CountryInterestedIn = master.CountryInterestedIn,
-        //        CountryName = countryRepository?.GetByIdAsync(master.CountryInterestedIn)?.Result?.CountryName,
-        //        DocumentUploadStatus = master.DocumentUploadStatus,
-        //        UniversityPreferred = master.UniversityPreferred,
-        //        OfferLetterStatus = master.OfferLetterStatus,
-        //        DepositPaidUniversity = master.DepositPaidUniversity,
-        //        VisaStatus = master.VisaStatus,
-        //        RefundStatus = master.RefundStatus,
-        //        FutureIntake = master.FutureIntake,
-        //        Status = master.Status
-
-        //    };
-        //    return BaseResult<LeadPropertiesDto>.Ok(dtoTasks);
-
-        //}
 
         public async Task<BaseResult<List<LeadPropertyValueDto>>> Handle(
     LeadPropertiesGetByIdQuery request,

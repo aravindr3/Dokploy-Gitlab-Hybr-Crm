@@ -130,7 +130,8 @@ namespace HyBrCRM.Application.Features.HolidaysLead.Query.GetById
                 MealPlan = master?.MealPlan,
                 Notes = master?.Notes,
                 FollowUpDate = master?.FollowUpDate,
-                AsignedAgent = master?.AsignedAgent,
+                AsignedAgent = userService.GetUserByIdAsync(master?.AsignedAgent)?.Result?.Data?.UserName,
+                //AsignedAgent = master?.AsignedAgent,
                 VerticalId = master?.VerticalId,
                 VerticalName = leadVertical?.Data?.VerticalName,
 
@@ -145,6 +146,7 @@ namespace HyBrCRM.Application.Features.HolidaysLead.Query.GetById
                 Stage = stagesName,
 
                 LeadStatusName = stagesServices.GetByIdAsync(domainStagesServices.GetByIdAsync(master.LeadStatusId)?.Result?.StagesId)?.Result?.Name,
+                Other = master?.Other,
                 Contact = dtoContact,
                 LeadDocument = leadDocumentDto
 

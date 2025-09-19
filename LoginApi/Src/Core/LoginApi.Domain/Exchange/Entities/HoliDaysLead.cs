@@ -15,7 +15,7 @@ namespace HyBrCRM.Domain.Exchange.Entities
             string? prefferedDestination, string? tripDuration, string? depatureCity, DateTime? startDate,
             DateTime? endDate, int adults, int childWithBed, int childWithoutBed, string? beddingPreference,
             string? roomType, string? mealPlan, string? notes, DateTime? followUpDate, string? asignedAgent , string? verticalId ,
-            string ? leadSourceId , string ? leadStatusId , string ? categoryId)
+            string ? leadSourceId , string ? leadStatusId , string ? categoryId , string ? other)
         {
             LeadContactId = leadContactId;
             EnquiryType = enquiryType;
@@ -38,6 +38,8 @@ namespace HyBrCRM.Domain.Exchange.Entities
             LeadSourceId = leadSourceId;
             LeadStatusId = leadStatusId;
             CategoryId = categoryId;
+            Other = other;
+
         }
 
         public string ? LeadContactId { get; set; }
@@ -61,10 +63,11 @@ namespace HyBrCRM.Domain.Exchange.Entities
         public string? LeadSourceId { get; set; }
         public string? LeadStatusId { get; set; }
         public string ? CategoryId { get; set; }
+        public string ? Other {  get; set; }
 
         public void Update(string leadContactId, string enquiryType, string travelType, string prefferedDestination, string tripDuration, string depatureCity, DateTime? startDate, DateTime? endDate, int adults, int childWithBed, int childWithoutBed, 
             string beddingPreference, string roomType, string mealPlan, string notes, DateTime? followUpDate, string asignedAgent, string verticalId,
-            string ? leadSourceId , string ? leadStatusId , string? categoryId)
+            string ? leadSourceId , string ? leadStatusId , string? categoryId , string other)
         {
             LeadContactId = leadContactId;
             EnquiryType = enquiryType;
@@ -87,6 +90,7 @@ namespace HyBrCRM.Domain.Exchange.Entities
             LeadSourceId = leadSourceId;
             LeadStatusId = leadStatusId;
             CategoryId = categoryId;
+            Other = other;
         }
     }
 }

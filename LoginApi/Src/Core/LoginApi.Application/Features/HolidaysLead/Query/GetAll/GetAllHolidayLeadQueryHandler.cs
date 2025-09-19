@@ -48,7 +48,6 @@ namespace HyBrCRM.Application.Features.HolidaysLead.Query.GetAll
             var allLeadContacts = await leadContactRepository.GetAllAsync();
             var allUsers = await userService.GetAllUsersAsync();
             var result = new List<HoliDayLeadDto>();
-
             foreach (var master in activeLeads)
             {
                 var contacts = await leadContactRepository.GetByIdChildAsync(a => a.Id == master.LeadContactId, c => c.Country, j => j.State, x => x.Gender);
@@ -56,6 +55,7 @@ namespace HyBrCRM.Application.Features.HolidaysLead.Query.GetAll
                 var contact = cont.FirstOrDefault();
                 var properties = await leadPropertiesValueServices?.GetByIdChildAsync(a => a.LeadId == master.Id && a.Status == 1);
 
+                var agent = allUsers?.Data.FirstOrDefault(a => a.Id == master.AsignedAgent);
 
                 var vertical = await verticalServices?.GetVerticalById(contact?.VerticalId);
                 var dtoContact = cont.Select(c => new LeadContactDto
@@ -96,6 +96,7 @@ namespace HyBrCRM.Application.Features.HolidaysLead.Query.GetAll
             var propertyLead = allLeads.FirstOrDefault(l => l.Id == v.LeadId);
             var leadContact = allLeadContacts.FirstOrDefault(lc => lc.Id == propertyLead?.LeadContactId);
             var owner = allUsers.Data.FirstOrDefault(a => a.Id == v.OwnerId);
+
 
             string value;
             if (v.PropertyDefinitionId == "01JZT20S7BZKW3YGM05S5GVFY2" && !string.IsNullOrWhiteSpace(v.Value))
@@ -183,7 +184,9 @@ namespace HyBrCRM.Application.Features.HolidaysLead.Query.GetAll
                     MealPlan = master?.MealPlan,
                     Notes = master?.Notes,
                     FollowUpDate = master?.FollowUpDate,
-                    AsignedAgent = master?.AsignedAgent,
+                    AsignedAgent = agent?.UserName,
+                    //AsignedAgent = userService?.GetUserByIdAsync(master?.AsignedAgent)?.Result?.Data?.UserName,
+                    //AsignedAgent = master?.AsignedAgent,
                     VerticalId = master?.VerticalId,
                     VerticalName = leadvertical?.Data?.VerticalName,
                     Created = master?.Created,
@@ -191,6 +194,7 @@ namespace HyBrCRM.Application.Features.HolidaysLead.Query.GetAll
                     Stage = stagesName,
                     LeadProperties = dtoProperties,
                     Status = master?.Status,
+                    Other = master?.Other,
                     Contact = dtoContact,
                     LeadDocument = leadDocumentDto
                 };

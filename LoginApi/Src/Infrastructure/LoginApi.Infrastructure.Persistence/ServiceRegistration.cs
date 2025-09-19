@@ -61,35 +61,35 @@ public static class ServiceRegistration
         services.AddControllers().AddFluentValidation(fv =>fv.RegisterValidatorsFromAssemblyContaining<CurrencyBoardRequestValidator>());
 
         // Configure Quartz
-        services.AddQuartz(q =>
-        {
-            //q.UsePersistentStore(x =>
-            //{
-            //    x.UsePostgres(configuration.GetConnectionString("DefaultConnection"));
-            //    x.UseJsonSerializer();
-            //    x.UseClustering();
-            //});
+        //services.AddQuartz(q =>
+        //{
+        //    //q.UsePersistentStore(x =>
+        //    //{
+        //    //    x.UsePostgres(configuration.GetConnectionString("DefaultConnection"));
+        //    //    x.UseJsonSerializer();
+        //    //    x.UseClustering();
+        //    //});
 
-            // Register a job
-            var jobKey = new JobKey("CurrencyJob");
-            q.AddJob<CurrencyJob>(opts => opts.WithIdentity(jobKey));
+        //    // Register a job
+        //    var jobKey = new JobKey("CurrencyJob");
+        //    q.AddJob<CurrencyJob>(opts => opts.WithIdentity(jobKey));
 
-            q.AddTrigger(opts => opts
-                .ForJob(jobKey)
-                .WithIdentity("CurrencyTrigger")
-                .WithCronSchedule("0 0 * * * ?")); // Runs every hour, at the start of the hour
+        //    q.AddTrigger(opts => opts
+        //        .ForJob(jobKey)
+        //        .WithIdentity("CurrencyTrigger")
+        //        .WithCronSchedule("0 0 * * * ?")); // Runs every hour, at the start of the hour
 
-            //q.AddTrigger(opts => opts
-            //    .ForJob(jobKey)
-            //    .WithIdentity("CurrencyTrigger")
-            //    //.WithCronSchedule("0 0 12 * * ?")
-            //    .StartNow()
-            //    .WithSimpleSchedule(x => x.WithIntervalInHours(8).RepeatForever())
+        //    //q.AddTrigger(opts => opts
+        //    //    .ForJob(jobKey)
+        //    //    .WithIdentity("CurrencyTrigger")
+        //    //    //.WithCronSchedule("0 0 12 * * ?")
+        //    //    .StartNow()
+        //    //    .WithSimpleSchedule(x => x.WithIntervalInHours(8).RepeatForever())
 
-            //    );
-        });
+        //    //    );
+        //});
 
-        services.AddQuartzHostedService(q => q.WaitForJobsToComplete = true);
+        //services.AddQuartzHostedService(q => q.WaitForJobsToComplete = true);
 
         services.RegisterRepositories();
 
