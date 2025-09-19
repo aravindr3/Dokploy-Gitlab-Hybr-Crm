@@ -10,7 +10,8 @@ services:
       - ConnectionStrings__DefaultConnection=Server=dbserver1.hybrhind.com;Port=6432;Database=crm_dev_db;User Id=apuser;Password=apuse6@#2260;Command Timeout=0;TimeZone=Asia/Kolkata
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.api.rule=Host(`uatcrm-uatcrmapi-ya2jx8-b348c0-31-97-202-93.traefik.me`)"
+      - "traefik.http.routers.api.rule=Host(`uatcrm-uatcrmapi-9k1squ-16f23a-31-97-202-93.traefik.me`)"
       - "traefik.http.routers.api.entrypoints=web"
       - "traefik.http.services.api.loadbalancer.server.port=8082"
+
 
