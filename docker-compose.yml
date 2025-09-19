@@ -1,9 +1,7 @@
 version: "3.9"
 services:
   api:
-    build:
-      context: .
-      dockerfile: Dockerfile
+    image: aravindr231/hybrcrmwebapi:latest   # or your desired Docker Hub image
     environment:
       - ASPNETCORE_ENVIRONMENT=Production
       - ASPNETCORE_URLS=http://+:8081
@@ -25,3 +23,4 @@ services:
 
 volumes:
   postgres_data:
+
