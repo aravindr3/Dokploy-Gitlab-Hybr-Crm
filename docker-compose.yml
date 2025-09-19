@@ -3,7 +3,6 @@ version: "3.9"
 services:
   api:
     image: aravindr231/hybrcrmwebapi:latest
-    container_name: webapi
     environment:
       - ASPNETCORE_ENVIRONMENT=Production
       - ASPNETCORE_URLS=http://+:8081
@@ -29,3 +28,4 @@ services:
 
 volumes:
   postgres_data:
+
