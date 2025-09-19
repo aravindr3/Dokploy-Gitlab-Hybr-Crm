@@ -2,7 +2,7 @@ version: "3.9"
 
 services:
   api:
-    image: aravindr231/crm-api:latest
+    image: aravindr231/crmapi:latest
     container_name: api
     environment:
       - ASPNETCORE_ENVIRONMENT=Production
@@ -14,5 +14,6 @@ services:
       - "traefik.http.routers.api.entrypoints=websecure"
       - "traefik.http.routers.api.tls=true"
       - "traefik.http.services.api.loadbalancer.server.port=5000"
+
 
 
