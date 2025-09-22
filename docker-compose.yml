@@ -2,10 +2,11 @@ version: '3.9'
 
 services:
   hybrcrm.webapi:
+    container_name: hybrcrm-webapi
     build:
       context: .
       dockerfile: LoginApi/Src/Presentation/LoginApi.WebApi/Dockerfile
-    image: ${DOCKER_REGISTRY-}hybrcrmwebapi
+    image: hybrcrmwebapi
     ports:
       - "5000:8080"
       - "5001:8081"
