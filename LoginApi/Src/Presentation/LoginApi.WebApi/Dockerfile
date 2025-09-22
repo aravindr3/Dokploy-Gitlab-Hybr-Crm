@@ -1,20 +1,13 @@
-# See https://aka.ms/customizecontainer to learn how to customize your debug container and how Visual Studio uses this Dockerfile to build your images for faster debugging.
-
 # Base runtime image
 FROM mcr.microsoft.com/dotnet/aspnet:9.0 AS base
 WORKDIR /app
 EXPOSE 8080
-EXPOSE 8081
 
-# Mountable folder for Data Protection keys
-VOLUME /keys
-
-# Build image
+# Build stage
 FROM mcr.microsoft.com/dotnet/sdk:9.0 AS build
-ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
 
-# Copy csproj files and restore dependencies
+# Copy project files
 COPY ["LoginApi/Src/Presentation/LoginApi.WebApi/HyBrCRM.WebApi.csproj", "LoginApi/Src/Presentation/LoginApi.WebApi/"]
 COPY ["LoginApi/Src/Infrastructure/LoginApi.Infrastructure.Identity/HyBrCRM.Infrastructure.Identity.csproj", "LoginApi/Src/Infrastructure/LoginApi.Infrastructure.Identity/"]
 COPY ["LoginApi/Src/Core/LoginApi.Application/HyBrCRM.Application.csproj", "LoginApi/Src/Core/LoginApi.Application/"]
@@ -22,24 +15,20 @@ COPY ["LoginApi/Src/Core/LoginApi.Domain/HyBrCRM.Domain.csproj", "LoginApi/Src/C
 COPY ["LoginApi/Src/Infrastructure/LoginApi.Infrastructure.Resources/HyBrCRM.Infrastructure.Resources.csproj", "LoginApi/Src/Infrastructure/LoginApi.Infrastructure.Resources/"]
 COPY ["LoginApi/Src/Infrastructure/LoginApi.Infrastructure.Persistence/HyBrCRM.Infrastructure.Persistence.csproj", "LoginApi/Src/Infrastructure/LoginApi.Infrastructure.Persistence/"]
 
-RUN dotnet restore "./LoginApi/Src/Presentation/LoginApi.WebApi/HyBrCRM.WebApi.csproj"
+# Restore dependencies
+RUN dotnet restore "LoginApi/Src/Presentation/LoginApi.WebApi/HyBrCRM.WebApi.csproj"
 
-# Copy everything else and build
+# Copy all source code and build
 COPY . .
 WORKDIR "/src/LoginApi/Src/Presentation/LoginApi.WebApi"
-RUN dotnet build "./HyBrCRM.WebApi.csproj" -c $BUILD_CONFIGURATION -o /app/build
+RUN dotnet build "HyBrCRM.WebApi.csproj" -c Release -o /app/build
 
-# Publish image
+# Publish stage
 FROM build AS publish
-ARG BUILD_CONFIGURATION=Release
-RUN dotnet publish "./HyBrCRM.WebApi.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
+RUN dotnet publish "HyBrCRM.WebApi.csproj" -c Release -o /app/publish /p:UseAppHost=false
 
-# Final runtime image
+# Final stage
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-
-# Only copy wwwroot if it exists
-# COPY LoginApi/Src/Presentation/LoginApi.WebApi/wwwroot /app/wwwroot
-
 ENTRYPOINT ["dotnet", "HyBrCRM.WebApi.dll"]
