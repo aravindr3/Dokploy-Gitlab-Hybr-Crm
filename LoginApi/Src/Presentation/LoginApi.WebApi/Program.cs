@@ -92,33 +92,33 @@ public class Program
         //});
         Console.WriteLine("Kestrel configuration completed.");
         // Configure Kestrel to use HTTP protocol
-        builder.WebHost.ConfigureKestrel(options =>
-        {
-            // Example: Listen on port 5000 for HTTP
-            //options.ListenAnyIP(Convert.ToInt32(builder.Configuration["KestrelSettings:Httpport"]), listenOptions =>
-            //{
-            //    listenOptions.Protocols = HttpProtocols.Http1; // Explicitly use HTTP/1.1
-            //});
-            options.Limits.MaxRequestBodySize = 52428800; // 50 MB
-            options.Limits.KeepAliveTimeout = TimeSpan.FromMinutes(5);
-            options.Limits.RequestHeadersTimeout = TimeSpan.FromMinutes(5);
+        //builder.WebHost.ConfigureKestrel(options =>
+        //{
+        //    // Example: Listen on port 5000 for HTTP
+        //    //options.ListenAnyIP(Convert.ToInt32(builder.Configuration["KestrelSettings:Httpport"]), listenOptions =>
+        //    //{
+        //    //    listenOptions.Protocols = HttpProtocols.Http1; // Explicitly use HTTP/1.1
+        //    //});
+        //    options.Limits.MaxRequestBodySize = 52428800; // 50 MB
+        //    options.Limits.KeepAliveTimeout = TimeSpan.FromMinutes(5);
+        //    options.Limits.RequestHeadersTimeout = TimeSpan.FromMinutes(5);
 
-            // Example: Optionally enable HTTP/2 on a different endpoint
+        //    // Example: Optionally enable HTTP/2 on a different endpoint
 
-            //options.ListenAnyIP(5001, listenOptions =>
-            //{
-            //    listenOptions.Protocols = Microsoft.AspNetCore.Server.Kestrel.Core.HttpProtocols.Http1; // Use HTTP/2
-            //    listenOptions.Protocols = Microsoft.AspNetCore.Server.Kestrel.Core.HttpProtocols.Http2; // Use HTTP/2
-            //    listenOptions.UseHttps(httpsOptions =>
-            //    {
-            //        // Enable only TLS 1.2 and TLS 1.3
-            //        httpsOptions.SslProtocols = System.Security.Authentication.SslProtocols.Tls12
-            //                                  | System.Security.Authentication.SslProtocols.Tls13;
-            //    });
-            //});
+        //    //options.ListenAnyIP(5001, listenOptions =>
+        //    //{
+        //    //    listenOptions.Protocols = Microsoft.AspNetCore.Server.Kestrel.Core.HttpProtocols.Http1; // Use HTTP/2
+        //    //    listenOptions.Protocols = Microsoft.AspNetCore.Server.Kestrel.Core.HttpProtocols.Http2; // Use HTTP/2
+        //    //    listenOptions.UseHttps(httpsOptions =>
+        //    //    {
+        //    //        // Enable only TLS 1.2 and TLS 1.3
+        //    //        httpsOptions.SslProtocols = System.Security.Authentication.SslProtocols.Tls12
+        //    //                                  | System.Security.Authentication.SslProtocols.Tls13;
+        //    //    });
+        //    //});
 
-            //options.ListenUnixSocket("/tmp/kestrel-server.sock");
-        });
+        //    //options.ListenUnixSocket("/tmp/kestrel-server.sock");
+        //});
         Console.WriteLine("Kestrel configuration completed.");
         // Get Time Zone from appsettings.json
         var timeZoneId = "Asia/Kolkata"; // Fallback to UTC
@@ -146,16 +146,16 @@ public class Program
         })
         .WithName("GetWeatherForecast");
 
-        //app.UseExceptionHandler(a => a.Run(async context =>
-        //{
-        //    Console.WriteLine("exception");
-        //    var exceptionHandlerPathFeature = context.Features.Get<IExceptionHandlerPathFeature>();
-        //    var exception = exceptionHandlerPathFeature.Error;
-        //    Console.WriteLine(exception.Message);
-        //    var result = JsonConvert.SerializeObject(new { error = exception.Message });
-        //    context.Response.ContentType = "application/json";
-        //    await context.Response.WriteAsync(result);
-        //}));
+        app.UseExceptionHandler(a => a.Run(async context =>
+        {
+            Console.WriteLine("exception");
+            var exceptionHandlerPathFeature = context.Features.Get<IExceptionHandlerPathFeature>();
+            var exception = exceptionHandlerPathFeature.Error;
+            Console.WriteLine(exception.Message);
+            var result = JsonConvert.SerializeObject(new { error = exception.Message });
+            context.Response.ContentType = "application/json";
+            await context.Response.WriteAsync(result);
+        }));
         using (var scope = app.Services.CreateScope())
         {
             var services = scope.ServiceProvider;
