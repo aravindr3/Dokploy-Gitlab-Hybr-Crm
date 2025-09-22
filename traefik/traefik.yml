@@ -1,0 +1,8 @@
+entryPoints:
+  web:
+    address: ":80"
+
+providers:
+  file:
+    filename: /etc/traefik/traefik-dynamic.yml   # Mount point in container
+    watch: true
