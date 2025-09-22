@@ -120,7 +120,7 @@ public class Program
         //    //options.ListenUnixSocket("/tmp/kestrel-server.sock");
         //});
         builder.WebHost.ConfigureKestrel(options =>
-        {
+        { Console.WriteLine("Port 8082.");
             options.ListenAnyIP(8082); // Bind to all interfaces
         });
         Console.WriteLine("Kestrel configuration completed.");
