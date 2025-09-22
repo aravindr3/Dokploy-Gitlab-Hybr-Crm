@@ -1,7 +1,7 @@
 # Base runtime image
 FROM mcr.microsoft.com/dotnet/aspnet:9.0 AS base
 WORKDIR /app
-EXPOSE 8080
+EXPOSE 8082
 
 # Build stage
 FROM mcr.microsoft.com/dotnet/sdk:9.0 AS build
@@ -31,4 +31,8 @@ RUN dotnet publish "HyBrCRM.WebApi.csproj" -c Release -o /app/publish /p:UseAppH
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
+
+# Ensure the app listens on all interfaces
+ENV DOTNET_RUNNING_IN_CONTAINER=true
+ENV DOTNET_HOST=0.0.0.0
 ENTRYPOINT ["dotnet", "HyBrCRM.WebApi.dll"]
