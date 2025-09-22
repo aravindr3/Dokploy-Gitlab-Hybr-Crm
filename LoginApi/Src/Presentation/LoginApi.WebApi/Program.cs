@@ -77,6 +77,7 @@ public class Program
         builder.Services.AddDataProtection()
      .PersistKeysToFileSystem(new DirectoryInfo(@"/keys"))
      .SetApplicationName("HybrCrmWebApi");
+        builder.Configuration.AddJsonFile("appsettings.json", optional: false, reloadOnChange: false);
 
 
         // Configure Kestrel
