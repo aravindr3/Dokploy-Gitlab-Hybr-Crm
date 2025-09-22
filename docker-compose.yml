@@ -1,12 +1,16 @@
 services:
   api:
     container_name: hybrcrm-webapi
-    build:
-      context: .
-      dockerfile: LoginApi/Src/Presentation/LoginApi.WebApi/Dockerfile
-    image: hybrcrmwebapi
-    ports:
-      - "5000:8080"
-      - "5001:8081"
-    volumes:
-      - ./keys:/keys
+ build:
+   context: .
+   dockerfile: LoginApi/Src/Presentation/LoginApi.WebApi/Dockerfile
+ image: hybrcrmwebapi
+ ports:
+   - "5000:8080"
+   - "5001:8081"
+ volumes:
+   - ./keys:/keys
+ ulimits:
+   nofile:
+     soft: 65535
+     hard: 65535
