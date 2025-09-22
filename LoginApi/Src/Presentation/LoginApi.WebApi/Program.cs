@@ -146,6 +146,8 @@ public class Program
         })
         .WithName("GetWeatherForecast");
 
+        Console.WriteLine("weatherforecast.");
+
         app.UseExceptionHandler(a => a.Run(async context =>
         {
             Console.WriteLine("exception");
