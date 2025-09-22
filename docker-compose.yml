@@ -20,11 +20,12 @@ services:
         hard: 65535
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.hybrcrm.rule=Host(`uatcrm-docker-mj5i8v-b8a6cb-31-97-202-93.traefik.me`)"
+      - "traefik.http.routers.hybrcrm.rule=Host(`uatcrm-uatcrmapi-wztgac-7a18bc-31-97-202-93.traefik.me`)"
       - "traefik.http.routers.hybrcrm.entrypoints=web,websecure"
       - "traefik.http.routers.dockerweb.middlewares=strip-hybrcrmwebapi"
       - "traefik.http.middlewares.strip-dockerweb.stripprefix.prefixes=/hybrcrmwebapi"
       - "traefik.http.services.hybrcrm.loadbalancer.server.port=8080"
+
 
 
 
