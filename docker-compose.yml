@@ -1,5 +1,5 @@
 services:
-  hybrcrm.webapi:
+  api:
     image: ${DOCKER_REGISTRY-}hybrcrmwebapi
     build:
       context: .
