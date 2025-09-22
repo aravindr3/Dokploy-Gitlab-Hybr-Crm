@@ -22,8 +22,8 @@ public static class SwaggerExtensions
         app.UseSwaggerUI(options =>
         {
             foreach (var description in provider.ApiVersionDescriptions)
-                options.SwaggerEndpoint($"/swagger/{description.GroupName}/swagger.json",
-                    description.GroupName.ToUpperInvariant());
+                options.SwaggerEndpoint($"../swagger/{description.GroupName}/swagger.json",
+                options.RoutePrefix != string.Empty ? $"{description.GroupName.ToUpperInvariant()}" : description.GroupName.ToUpperInvariant());
         });
 
         return app;
