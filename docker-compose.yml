@@ -1,7 +1,7 @@
 version: '3.9'
 
 services:
-  api:
+  dockerweb :
     container_name: hybrcrm-webapi
     build:
       context: .
@@ -25,6 +25,7 @@ services:
       - "traefik.http.routers.dockerweb.middlewares=strip-hybrcrmwebapi"
       - "traefik.http.middlewares.strip-dockerweb.stripprefix.prefixes=/hybrcrmwebapi"
       - "traefik.http.services.hybrcrm.loadbalancer.server.port=8080"
+
 
 
 
