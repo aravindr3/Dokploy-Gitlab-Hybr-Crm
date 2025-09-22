@@ -8,9 +8,9 @@ services:
       dockerfile: LoginApi/Src/Presentation/LoginApi.WebApi/Dockerfile
     image: hybrcrmwebapi
     ports:
-      - "8080"  # Exposed internally for Traefik
+      - "8080"   # Exposed internally for Traefik
     volumes:
-      - ./keys:/keys  # Persist Data Protection keys
+      - ./keys:/keys   # Persist Data Protection keys
     environment:
       DOTNET_ENVIRONMENT: Production
     ulimits:
@@ -18,9 +18,8 @@ services:
         soft: 65535
         hard: 65535
     labels:
-      # Traefik routing configuration
       - "traefik.enable=true"
-      - "traefik.http.routers.hybrcrm.rule=Host(`uatcrm-uatcrmapi-kemyci-71c352-31-97-202-93.traefik.me`)"
+      - "traefik.http.routers.hybrcrm.rule=Host(`uatcrm-uatcrmapi-cybmb8-c8cd8c-31-97-202-93.traefik.me`)"
       - "traefik.http.routers.hybrcrm.entrypoints=web,websecure"
       - "traefik.http.routers.hybrcrm.tls=true"
       - "traefik.http.services.hybrcrm.loadbalancer.server.port=8080"
