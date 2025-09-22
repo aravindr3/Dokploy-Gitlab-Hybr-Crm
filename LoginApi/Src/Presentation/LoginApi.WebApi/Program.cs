@@ -119,6 +119,10 @@ public class Program
 
         //    //options.ListenUnixSocket("/tmp/kestrel-server.sock");
         //});
+        builder.WebHost.ConfigureKestrel(options =>
+        {
+            options.ListenAnyIP(8082); // Bind to all interfaces
+        });
         Console.WriteLine("Kestrel configuration completed.");
         // Get Time Zone from appsettings.json
         var timeZoneId = "Asia/Kolkata"; // Fallback to UTC
