@@ -74,12 +74,9 @@ public class Program
         builder.Services.AddSingleton<IAutoCallSettings>(sp =>
             sp.GetRequiredService<IOptions<AutoCallSettings>>().Value);
 
-        builder.Services.AddDataProtection().PersistKeysToFileSystem(new DirectoryInfo(@"C:\temp-keys\"))
-                .UseCryptographicAlgorithms(new AuthenticatedEncryptorConfiguration()
-                {
-                    EncryptionAlgorithm = EncryptionAlgorithm.AES_256_CBC,
-                    ValidationAlgorithm = ValidationAlgorithm.HMACSHA256
-                });
+        builder.Services.AddDataProtection()
+     .PersistKeysToFileSystem(new DirectoryInfo(@"/keys"))
+     .SetApplicationName("HybrCrmWebApi");
 
 
         // Configure Kestrel

@@ -1,6 +1,13 @@
+version: '3.9'
+
 services:
   hybrcrm.webapi:
-    image: ${DOCKER_REGISTRY-}hybrcrmwebapi
     build:
       context: .
       dockerfile: LoginApi/Src/Presentation/LoginApi.WebApi/Dockerfile
+    image: hybrcrm.webapi   # <--- must exist if no build-only service
+    ports:
+      - "5000:8080"
+      - "5001:8081"
+    volumes:
+      - ./keys:/keys
