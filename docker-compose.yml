@@ -2,7 +2,7 @@ version: '3.9'
 
 services:
   api :
-    container_name: hybrcrm-webapi
+    container_name: hybrcrmwebapi
     build:
       context: .
       dockerfile: LoginApi/Src/Presentation/LoginApi.WebApi/Dockerfile
@@ -25,6 +25,7 @@ services:
       - "traefik.http.routers.dockerweb.middlewares=strip-hybrcrmwebapi"
       - "traefik.http.middlewares.strip-dockerweb.stripprefix.prefixes=/hybrcrmwebapi"
       - "traefik.http.services.hybrcrm.loadbalancer.server.port=8080"
+
 
 
 
