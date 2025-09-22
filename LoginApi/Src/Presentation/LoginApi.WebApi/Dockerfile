@@ -39,7 +39,7 @@ FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
 
-# Optional: copy wwwroot if your Web API serves static files (Swagger UI, SPA, etc.)
-COPY LoginApi/Src/Presentation/LoginApi.WebApi/wwwroot /app/wwwroot
+# Only copy wwwroot if it exists
+# COPY LoginApi/Src/Presentation/LoginApi.WebApi/wwwroot /app/wwwroot
 
 ENTRYPOINT ["dotnet", "HyBrCRM.WebApi.dll"]
